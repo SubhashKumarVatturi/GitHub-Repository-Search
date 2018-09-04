@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">GithHubSearch</string>
+    <string name="please_wait">Please wait …</string>
+    <string name="updated_on">Updated on %s</string>
+    <string name="search">Search</string>
+    <string name="no_data">No data</string>
+</resources>
