@@ -12,6 +12,8 @@ import com.blue.githhubsearch.model.RepoDetails;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
@@ -57,7 +59,16 @@ public class RepoAdapter extends RecyclerView.Adapter<RepoAdapter.RepoHolder> {
 
     public void setRepos(List<RepoDetails.Item> repos) {
         this.mRepos = repos;
+        if (mRepos != null) {
+            Collections.sort(mRepos, new Comparator<RepoDetails.Item>() {
+                @Override
+                public int compare(RepoDetails.Item o1, RepoDetails.Item o2) {
+                    return o2.getWatchersCount().compareTo(o1.getWatchersCount());
+                }
+            });
+        }
         notifyDataSetChanged();
+
     }
 
     public static class RepoHolder extends RecyclerView.ViewHolder {

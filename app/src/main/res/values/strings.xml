@@ -4,4 +4,5 @@
     <string name="updated_on">Updated on %s</string>
     <string name="search">Search</string>
     <string name="no_data">No data</string>
+    <string name="check_internet_connection">Please check internet connectivity</string>
 </resources>

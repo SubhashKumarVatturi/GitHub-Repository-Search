@@ -1,7 +1,6 @@
 package com.blue.githhubsearch.repo;
 
 import android.text.Editable;
-import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.EditText;
@@ -57,12 +56,12 @@ public class RepoPresenter implements IRespos.IPresenter {
 
             @Override
             public void onTextChanged(CharSequence text, int start, int before, int count) {
-                if (TextUtils.isEmpty(text)) {
+                if (text == null || text.toString().trim().length() == 0) {
                     mView.onReposLoaded(null);
                     closeButton.setVisibility(View.GONE);
                 } else {
                     closeButton.setVisibility(View.VISIBLE);
-                    callRepos(text.toString());
+                    callRepos(text.toString().trim());
                 }
             }
 

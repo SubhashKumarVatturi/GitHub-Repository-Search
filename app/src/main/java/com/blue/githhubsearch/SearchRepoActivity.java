@@ -56,6 +56,10 @@ public class SearchRepoActivity extends AppCompatActivity implements IRespos.IVi
         mRepoAdapter = new RepoAdapter();
         rvRepoList.setAdapter(mRepoAdapter);
 
+        if (!Utils.isOnline(this)) {
+            Utils.showToast(this, getString(R.string.check_internet_connection));
+        }
+
     }
 
     @OnClick(R.id.ibClose)
