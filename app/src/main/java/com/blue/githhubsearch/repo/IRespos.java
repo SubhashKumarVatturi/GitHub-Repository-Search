@@ -3,7 +3,8 @@ package com.blue.githhubsearch.repo;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
-import com.blue.githhubsearch.model.RepoDetails;
+import com.blue.githhubsearch.model.RepoData;
+import com.blue.githhubsearch.model.Repos;
 
 import java.util.List;
 
@@ -13,13 +14,13 @@ public interface IRespos {
 
     interface IView {
 
-        void onReposLoaded(List<RepoDetails.Item> repos);
+        void onReposLoaded(List<RepoData> repos);
 
         void showLoading(boolean show);
     }
 
     interface IModel {
-        void callRepos(Callback<RepoDetails> callback, String query);
+        void callRepos(Callback<Repos> callback, String query);
     }
 
     interface IPresenter {
@@ -29,4 +30,5 @@ public interface IRespos {
 
         void doSearchOn(EditText searchView, ImageButton closeButton);
     }
+
 }

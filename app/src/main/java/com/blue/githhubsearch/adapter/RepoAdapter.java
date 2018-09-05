@@ -8,7 +8,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.blue.githhubsearch.R;
-import com.blue.githhubsearch.model.RepoDetails;
+import com.blue.githhubsearch.model.RepoData;
+import com.blue.githhubsearch.repo.IOnclickView;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -22,7 +23,12 @@ import butterknife.ButterKnife;
 
 public class RepoAdapter extends RecyclerView.Adapter<RepoAdapter.RepoHolder> {
 
-    private List<RepoDetails.Item> mRepos;
+    private List<RepoData> mRepos;
+    private IOnclickView<RepoData> onClickListener;
+
+    public RepoAdapter(IOnclickView<RepoData> onClickListener) {
+        this.onClickListener = onClickListener;
+    }
 
     @NonNull
     @Override
@@ -32,7 +38,7 @@ public class RepoAdapter extends RecyclerView.Adapter<RepoAdapter.RepoHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull RepoHolder holder, int position) {
-        RepoDetails.Item item = mRepos.get(position);
+        RepoData item = mRepos.get(position);
         holder.tvName.setText(item.getFullName());
         holder.tvDescription.setText(item.getDescription());
         holder.tvUpdatedAt.setText(String.format("Updated on %s", getDate(item.getUpdatedAt())));
@@ -57,12 +63,12 @@ public class RepoAdapter extends RecyclerView.Adapter<RepoAdapter.RepoHolder> {
         return mRepos == null ? 0 : mRepos.size();
     }
 
-    public void setRepos(List<RepoDetails.Item> repos) {
+    public void setRepos(List<RepoData> repos) {
         this.mRepos = repos;
         if (mRepos != null) {
-            Collections.sort(mRepos, new Comparator<RepoDetails.Item>() {
+            Collections.sort(mRepos, new Comparator<RepoData>() {
                 @Override
-                public int compare(RepoDetails.Item o1, RepoDetails.Item o2) {
+                public int compare(RepoData o1, RepoData o2) {
                     return o2.getWatchersCount().compareTo(o1.getWatchersCount());
                 }
             });
@@ -71,7 +77,7 @@ public class RepoAdapter extends RecyclerView.Adapter<RepoAdapter.RepoHolder> {
 
     }
 
-    public static class RepoHolder extends RecyclerView.ViewHolder {
+    public class RepoHolder extends RecyclerView.ViewHolder {
 
         @BindView(R.id.tvName)
         TextView tvName;
@@ -85,6 +91,14 @@ public class RepoAdapter extends RecyclerView.Adapter<RepoAdapter.RepoHolder> {
         public RepoHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (onClickListener != null)
+                        onClickListener.onClick(mRepos.get(getAdapterPosition()));
+                }
+            });
         }
+
     }
 }

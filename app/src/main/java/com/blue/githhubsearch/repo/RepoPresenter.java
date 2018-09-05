@@ -6,7 +6,7 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 
-import com.blue.githhubsearch.model.RepoDetails;
+import com.blue.githhubsearch.model.Repos;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -25,15 +25,15 @@ public class RepoPresenter implements IRespos.IPresenter {
     @Override
     public void callRepos(String query) {
         mView.showLoading(true);
-        mModel.callRepos(new Callback<RepoDetails>() {
+        mModel.callRepos(new Callback<Repos>() {
             @Override
-            public void onResponse(Call<RepoDetails> call, Response<RepoDetails> response) {
+            public void onResponse(Call<Repos> call, Response<Repos> response) {
                 mView.onReposLoaded(response.body() == null ? null : response.body().getItems());
                 mView.showLoading(false);
             }
 
             @Override
-            public void onFailure(Call<RepoDetails> call, Throwable t) {
+            public void onFailure(Call<Repos> call, Throwable t) {
                 mView.onReposLoaded(null);
             }
         }, query);

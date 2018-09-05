@@ -1,5 +1,6 @@
 package com.blue.githhubsearch;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -11,7 +12,8 @@ import android.widget.ImageButton;
 import android.widget.ProgressBar;
 
 import com.blue.githhubsearch.adapter.RepoAdapter;
-import com.blue.githhubsearch.model.RepoDetails;
+import com.blue.githhubsearch.model.RepoData;
+import com.blue.githhubsearch.repo.IOnclickView;
 import com.blue.githhubsearch.repo.IRespos;
 import com.blue.githhubsearch.repo.RepoPresenter;
 
@@ -26,7 +28,7 @@ public class SearchRepoActivity extends AppCompatActivity implements IRespos.IVi
 
     @BindView(R.id.rvRepoList)
     RecyclerView rvRepoList;
-    @BindView(R.id.vProgres)
+    @BindView(R.id.vProgress)
     ProgressBar vProgress;
     @BindView(R.id.ibClose)
     ImageButton ibClose;
@@ -38,6 +40,7 @@ public class SearchRepoActivity extends AppCompatActivity implements IRespos.IVi
     private IRespos.IPresenter mRepoPresenter;
     private RepoAdapter mRepoAdapter;
 
+    public final static String REPO_DATA = "REPO_DATA";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,13 +56,24 @@ public class SearchRepoActivity extends AppCompatActivity implements IRespos.IVi
         mRepoPresenter.doSearchOn(etSearch, ibClose);
 
         rvRepoList.setLayoutManager(new LinearLayoutManager(this));
-        mRepoAdapter = new RepoAdapter();
+        mRepoAdapter = new RepoAdapter(new IOnclickView<RepoData>() {
+            @Override
+            public void onClick(RepoData item) {
+                Intent repoDetailsIntent = new Intent(SearchRepoActivity.this, com.blue.githhubsearch.RepoDetails.class);
+                repoDetailsIntent.putExtra(REPO_DATA, item);
+                startActivity(repoDetailsIntent);
+            }
+        });
         rvRepoList.setAdapter(mRepoAdapter);
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         if (!Utils.isOnline(this)) {
             Utils.showToast(this, getString(R.string.check_internet_connection));
         }
-
     }
 
     @OnClick(R.id.ibClose)
@@ -68,7 +82,7 @@ public class SearchRepoActivity extends AppCompatActivity implements IRespos.IVi
     }
 
     @Override
-    public void onReposLoaded(List<RepoDetails.Item> repos) {
+    public void onReposLoaded(List<RepoData> repos) {
         mRepoAdapter.setRepos(repos);
         vNoData.setVisibility(repos == null ? View.VISIBLE : View.GONE);
     }
@@ -77,7 +91,6 @@ public class SearchRepoActivity extends AppCompatActivity implements IRespos.IVi
     public void showLoading(boolean show) {
         vProgress.setVisibility(show ? View.VISIBLE : View.GONE);
     }
-
 
     @Override
     protected void onDestroy() {
