@@ -2,7 +2,6 @@ package com.blue.githhubsearch.details;
 
 
 import com.blue.githhubsearch.model.Contributions;
-import com.blue.githhubsearch.model.Details;
 
 import java.util.List;
 

@@ -39,6 +39,7 @@ public class RepoData implements Parcelable {
     @Expose
     private String contributorsUrl;
 
+
     public String getContributorsUrl() {
         return contributorsUrl;
     }
@@ -172,6 +173,10 @@ public class RepoData implements Parcelable {
             dest.writeByte((byte) 1);
             dest.writeInt(watchersCount);
         }
+    }
+
+    class Woner {
+
     }
 
 }

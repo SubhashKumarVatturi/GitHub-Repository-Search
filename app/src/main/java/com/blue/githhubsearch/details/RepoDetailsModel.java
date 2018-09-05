@@ -3,7 +3,6 @@ package com.blue.githhubsearch.details;
 import com.blue.githhubsearch.api.ApiClient;
 import com.blue.githhubsearch.api.ApiInterface;
 import com.blue.githhubsearch.model.Contributions;
-import com.blue.githhubsearch.model.Details;
 
 import java.util.List;
 
