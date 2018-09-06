@@ -28,7 +28,13 @@
 
         <activity
             android:name=".RepoDetails"
+            android:screenOrientation="portrait"
             android:label="@string/title_activity_repo_details"
+            android:theme="@style/AppTheme" />
+        <activity
+            android:screenOrientation="portrait"
+            android:name=".ContributorDetails"
+            android:label="@string/title_activity_contributor_details"
             android:theme="@style/AppTheme"/>
     </application>
 

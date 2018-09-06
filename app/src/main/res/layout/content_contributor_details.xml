@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".ContributorDetails"
+    tools:showIn="@layout/activity_contributor_details">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ProgressBar
+            android:id="@+id/vProgressView"
+            android:visibility="gone"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="-4dp"
+            android:layout_marginTop="-7dp"
+            android:indeterminate="true" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/ivAvathar"
+                android:layout_width="90dp"
+                android:layout_height="90dp"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/padding_32"
+                android:src="@mipmap/github_logo" />
+
+            <TextView
+                android:id="@+id/tvName"
+                style="@style/TextAppearance.AppCompat.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginLeft="@dimen/padding_16"
+                android:layout_marginRight="@dimen/padding_16"
+                android:layout_marginTop="@dimen/padding_16"
+                android:textColor="@color/colorBlack"
+                app:fontFamily="@font/roboto_bold" />
+
+            <TextView
+                android:id="@+id/tvLoginAs"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="@dimen/padding_16"
+                android:layout_marginRight="@dimen/padding_16"
+                android:layout_marginTop="@dimen/padding_4"
+                app:fontFamily="@font/roboto" />
+
+
+            <TextView
+                android:id="@+id/tvCompany"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/padding_16"
+                android:layout_marginRight="@dimen/padding_16"
+                android:layout_marginTop="@dimen/padding_16"
+                android:drawableLeft="@mipmap/ic_work"
+                android:drawablePadding="@dimen/padding_8"
+                android:drawableStart="@mipmap/ic_work"
+                android:textColor="@color/colorBlack"
+                app:fontFamily="@font/roboto" />
+
+
+            <TextView
+                android:id="@+id/tvLocation"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/padding_16"
+                android:layout_marginRight="@dimen/padding_16"
+                android:layout_marginTop="@dimen/padding_8"
+                android:drawableLeft="@mipmap/ic_location"
+                android:drawablePadding="@dimen/padding_8"
+                android:drawableStart="@mipmap/ic_location"
+                android:textColor="@color/colorBlack"
+                app:fontFamily="@font/roboto" />
+
+
+            <TextView
+                style="@style/Base.TextAppearance.AppCompat.SearchResult.Title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/padding_16"
+                android:layout_marginRight="@dimen/padding_16"
+                android:layout_marginTop="@dimen/padding_16"
+                android:text="@string/repositories"
+                android:textColor="@color/colorBlack"
+                app:fontFamily="@font/roboto_bold" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/rvRepositories"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="@dimen/padding_8"
+                android:layout_marginTop="@dimen/padding_8" />
+
+        </LinearLayout>
+
+    </FrameLayout>
+
+</android.support.v4.widget.NestedScrollView>

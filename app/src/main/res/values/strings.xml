@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">GithHubSearch</string>
+    <string name="app_name">GithHub Search</string>
     <string name="please_wait">Please wait …</string>
     <string name="updated_on">Updated on %s</string>
     <string name="search">Search</string>
@@ -9,4 +9,7 @@
     <string name="discription">Discription</string>
     <string name="contributors">Contributors</string>
     <string name="project_link">Project Link</string>
+    <string name="title_activity_contributor_details">Contributor Details</string>
+    <string name="repositories">Repositories</string>
+    <string name="login_as">Login as %s</string>
 </resources>

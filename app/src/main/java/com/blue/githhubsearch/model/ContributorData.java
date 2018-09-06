@@ -1,12 +1,9 @@
 package com.blue.githhubsearch.model;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
-public class Contributions implements Parcelable{
+public class ContributorData {
 
     @SerializedName("login")
     @Expose
@@ -62,52 +59,45 @@ public class Contributions implements Parcelable{
     @SerializedName("site_admin")
     @Expose
     private Boolean siteAdmin;
-    @SerializedName("contributions")
+    @SerializedName("name")
     @Expose
-    private Integer contributions;
-
-    protected Contributions(Parcel in) {
-        login = in.readString();
-        if (in.readByte() == 0) {
-            id = null;
-        } else {
-            id = in.readInt();
-        }
-        nodeId = in.readString();
-        avatarUrl = in.readString();
-        gravatarId = in.readString();
-        url = in.readString();
-        htmlUrl = in.readString();
-        followersUrl = in.readString();
-        followingUrl = in.readString();
-        gistsUrl = in.readString();
-        starredUrl = in.readString();
-        subscriptionsUrl = in.readString();
-        organizationsUrl = in.readString();
-        reposUrl = in.readString();
-        eventsUrl = in.readString();
-        receivedEventsUrl = in.readString();
-        type = in.readString();
-        byte tmpSiteAdmin = in.readByte();
-        siteAdmin = tmpSiteAdmin == 0 ? null : tmpSiteAdmin == 1;
-        if (in.readByte() == 0) {
-            contributions = null;
-        } else {
-            contributions = in.readInt();
-        }
-    }
-
-    public static final Creator<Contributions> CREATOR = new Creator<Contributions>() {
-        @Override
-        public Contributions createFromParcel(Parcel in) {
-            return new Contributions(in);
-        }
-
-        @Override
-        public Contributions[] newArray(int size) {
-            return new Contributions[size];
-        }
-    };
+    private String name;
+    @SerializedName("company")
+    @Expose
+    private String company;
+    @SerializedName("blog")
+    @Expose
+    private String blog;
+    @SerializedName("location")
+    @Expose
+    private String location;
+    @SerializedName("email")
+    @Expose
+    private Object email;
+    @SerializedName("hireable")
+    @Expose
+    private Object hireable;
+    @SerializedName("bio")
+    @Expose
+    private Object bio;
+    @SerializedName("public_repos")
+    @Expose
+    private Integer publicRepos;
+    @SerializedName("public_gists")
+    @Expose
+    private Integer publicGists;
+    @SerializedName("followers")
+    @Expose
+    private Integer followers;
+    @SerializedName("following")
+    @Expose
+    private Integer following;
+    @SerializedName("created_at")
+    @Expose
+    private String createdAt;
+    @SerializedName("updated_at")
+    @Expose
+    private String updatedAt;
 
     public String getLogin() {
         return login;
@@ -253,49 +243,108 @@ public class Contributions implements Parcelable{
         this.siteAdmin = siteAdmin;
     }
 
-    public Integer getContributions() {
-        return contributions;
+    public String getName() {
+        return name;
     }
 
-    public void setContributions(Integer contributions) {
-        this.contributions = contributions;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    @Override
-    public int describeContents() {
-        return 0;
+    public String getCompany() {
+        return company;
     }
 
-    @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(login);
-        if (id == null) {
-            dest.writeByte((byte) 0);
-        } else {
-            dest.writeByte((byte) 1);
-            dest.writeInt(id);
-        }
-        dest.writeString(nodeId);
-        dest.writeString(avatarUrl);
-        dest.writeString(gravatarId);
-        dest.writeString(url);
-        dest.writeString(htmlUrl);
-        dest.writeString(followersUrl);
-        dest.writeString(followingUrl);
-        dest.writeString(gistsUrl);
-        dest.writeString(starredUrl);
-        dest.writeString(subscriptionsUrl);
-        dest.writeString(organizationsUrl);
-        dest.writeString(reposUrl);
-        dest.writeString(eventsUrl);
-        dest.writeString(receivedEventsUrl);
-        dest.writeString(type);
-        dest.writeByte((byte) (siteAdmin == null ? 0 : siteAdmin ? 1 : 2));
-        if (contributions == null) {
-            dest.writeByte((byte) 0);
-        } else {
-            dest.writeByte((byte) 1);
-            dest.writeInt(contributions);
-        }
+    public void setCompany(String company) {
+        this.company = company;
     }
+
+    public String getBlog() {
+        return blog;
+    }
+
+    public void setBlog(String blog) {
+        this.blog = blog;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
+
+    public Object getEmail() {
+        return email;
+    }
+
+    public void setEmail(Object email) {
+        this.email = email;
+    }
+
+    public Object getHireable() {
+        return hireable;
+    }
+
+    public void setHireable(Object hireable) {
+        this.hireable = hireable;
+    }
+
+    public Object getBio() {
+        return bio;
+    }
+
+    public void setBio(Object bio) {
+        this.bio = bio;
+    }
+
+    public Integer getPublicRepos() {
+        return publicRepos;
+    }
+
+    public void setPublicRepos(Integer publicRepos) {
+        this.publicRepos = publicRepos;
+    }
+
+    public Integer getPublicGists() {
+        return publicGists;
+    }
+
+    public void setPublicGists(Integer publicGists) {
+        this.publicGists = publicGists;
+    }
+
+    public Integer getFollowers() {
+        return followers;
+    }
+
+    public void setFollowers(Integer followers) {
+        this.followers = followers;
+    }
+
+    public Integer getFollowing() {
+        return following;
+    }
+
+    public void setFollowing(Integer following) {
+        this.following = following;
+    }
+
+    public String getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(String createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public String getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(String updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
 }

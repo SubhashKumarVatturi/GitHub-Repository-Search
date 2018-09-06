@@ -1,6 +1,8 @@
 package com.blue.githhubsearch.api;
 
 import com.blue.githhubsearch.model.Contributions;
+import com.blue.githhubsearch.model.ContributorData;
+import com.blue.githhubsearch.model.RepoData;
 import com.blue.githhubsearch.model.Repos;
 
 import java.util.List;
@@ -17,5 +19,12 @@ public interface ApiInterface {
 
     @GET
     Call<List<Contributions>> getContributions(@Url String url);
+
+    @GET
+    Call<List<RepoData>> getReposWithUrl(@Url String url);
+
+
+    @GET
+    Call<ContributorData> getContributorDetails(@Url String url);
 
 }

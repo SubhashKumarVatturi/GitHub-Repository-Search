@@ -1,6 +1,7 @@
 package com.blue.githhubsearch.adapter;
 
 import android.content.Context;
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 
 import com.blue.githhubsearch.R;
 import com.blue.githhubsearch.model.Contributions;
+import com.blue.githhubsearch.repo.IOnclickView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 
@@ -39,6 +41,9 @@ public class ContributorsAdapter extends RecyclerView.Adapter<ContributorsAdapte
     public void onBindViewHolder(@NonNull ContributorViewer holder, int position) {
         Contributions contribution = mContributions.get(position);
         holder.tvName.setText(contribution.getLogin());
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            holder.ivAvathar.setTransitionName(contribution.getLogin());
+        }
 
         RequestOptions options = new RequestOptions()
                 .centerCrop()
@@ -67,9 +72,18 @@ public class ContributorsAdapter extends RecyclerView.Adapter<ContributorsAdapte
         @BindView(R.id.tvName)
         TextView tvName;
 
-        public ContributorViewer(View itemView) {
+        public ContributorViewer(final View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    if (mContext instanceof IOnclickView) {
+                        ((IOnclickView) mContext).onClick(mContributions.get(getAdapterPosition()), ivAvathar);
+                    }
+                }
+            });
         }
+
     }
 }

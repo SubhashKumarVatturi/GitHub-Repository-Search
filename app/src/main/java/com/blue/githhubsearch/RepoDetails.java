@@ -1,5 +1,6 @@
 package com.blue.githhubsearch;
 
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
@@ -19,6 +20,7 @@ import com.blue.githhubsearch.details.IRepoDetails;
 import com.blue.githhubsearch.details.RepoDetailsPresenter;
 import com.blue.githhubsearch.model.Contributions;
 import com.blue.githhubsearch.model.RepoData;
+import com.blue.githhubsearch.repo.IOnclickView;
 
 import java.util.List;
 
@@ -26,7 +28,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class RepoDetails extends AppCompatActivity implements IRepoDetails.IView {
+public class RepoDetails extends AppCompatActivity implements IRepoDetails.IView, IOnclickView<Contributions> {
 
     @BindView(R.id.ivAvathar)
     ImageView ivAvathar;
@@ -44,6 +46,8 @@ public class RepoDetails extends AppCompatActivity implements IRepoDetails.IView
     private IRepoDetails.IPresenter mPresenter;
     private ContributorsAdapter mContributorsAdapter;
     private RepoData mRepoDetails;
+
+    public final static String KEY_REPO_DATA = "REPO_DATA";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,7 +72,7 @@ public class RepoDetails extends AppCompatActivity implements IRepoDetails.IView
 
             mPresenter = new RepoDetailsPresenter(this);
 
-            mRepoDetails = intent.getParcelableExtra(SearchRepoActivity.REPO_DATA);
+            mRepoDetails = intent.getParcelableExtra(KEY_REPO_DATA);
             applyRepoData(mRepoDetails);
 
             mPresenter.getContributions(mRepoDetails.getContributorsUrl());
@@ -132,5 +136,22 @@ public class RepoDetails extends AppCompatActivity implements IRepoDetails.IView
     protected void onDestroy() {
         super.onDestroy();
         mPresenter.onDestroy();
+    }
+
+    public static final String KEY_CONTRIBUTION_DATA = "key_contribution_data";
+
+    @Override
+    public void onClick(Contributions item, View view) {
+
+        Intent contributionIntent = new Intent(this, ContributorDetails.class);
+        contributionIntent.putExtra(KEY_CONTRIBUTION_DATA, item);
+
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
+            ActivityOptions options = ActivityOptions
+                    .makeSceneTransitionAnimation(this, view, item.getLogin());
+            startActivity(contributionIntent, options.toBundle());
+        } else {
+            startActivity(contributionIntent);
+        }
     }
 }

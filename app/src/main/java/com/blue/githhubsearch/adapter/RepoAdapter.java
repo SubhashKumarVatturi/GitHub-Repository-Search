@@ -88,14 +88,14 @@ public class RepoAdapter extends RecyclerView.Adapter<RepoAdapter.RepoHolder> {
         @BindView(R.id.tvUpdatedAt)
         TextView tvUpdatedAt;
 
-        public RepoHolder(View itemView) {
+        public RepoHolder(final View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     if (onClickListener != null)
-                        onClickListener.onClick(mRepos.get(getAdapterPosition()));
+                        onClickListener.onClick(mRepos.get(getAdapterPosition()),itemView);
                 }
             });
         }
