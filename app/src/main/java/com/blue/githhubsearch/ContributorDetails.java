@@ -120,14 +120,16 @@ public class ContributorDetails extends AppCompatActivity implements IContributi
         }
     }
 
+
     @Override
     public void showLoading(boolean show) {
-        vProgressView.setVisibility(show ? View.VISIBLE : View.GONE);
+        vProgressView.setVisibility(show ? View.VISIBLE : View.INVISIBLE);
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        mPresenter.onDestroy();
+    protected void onRestart() {
+        super.onRestart();
+        vProgressView.setVisibility(View.GONE);
     }
+
 }
