@@ -2,7 +2,6 @@ package com.blue.githhubsearch.contribution;
 
 import com.blue.githhubsearch.model.ContributorData;
 import com.blue.githhubsearch.model.RepoData;
-import com.blue.githhubsearch.model.Repos;
 
 import java.util.List;
 
@@ -25,12 +24,14 @@ public class ContributionPresenter implements IContributionDetails.IPresenter {
         mModel.getRepos(new Callback<List<RepoData>>() {
             @Override
             public void onResponse(Call<List<RepoData>> call, Response<List<RepoData>> response) {
-                mView.onReposLoaded(response.body() );
+                if (mView != null)
+                    mView.onReposLoaded(response.body());
             }
 
             @Override
             public void onFailure(Call<List<RepoData>> call, Throwable t) {
-                mView.onReposLoaded(null);
+                if (mView != null)
+                    mView.onReposLoaded(null);
             }
         }, url);
 
@@ -42,14 +43,18 @@ public class ContributionPresenter implements IContributionDetails.IPresenter {
         mModel.getContributorDetails(new Callback<ContributorData>() {
             @Override
             public void onResponse(Call<ContributorData> call, Response<ContributorData> response) {
-                mView.onContributorDataLoaded(response.body());
-                mView.showLoading(false);
+                if (mView != null) {
+                    mView.onContributorDataLoaded(response.body());
+                    mView.showLoading(false);
+                }
             }
 
             @Override
             public void onFailure(Call<ContributorData> call, Throwable t) {
-                mView.onReposLoaded(null);
-                mView.showLoading(false);
+                if (mView != null) {
+                    mView.onReposLoaded(null);
+                    mView.showLoading(false);
+                }
             }
         }, url);
 

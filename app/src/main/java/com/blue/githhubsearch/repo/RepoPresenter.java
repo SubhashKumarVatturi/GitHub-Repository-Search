@@ -28,13 +28,18 @@ public class RepoPresenter implements IRespos.IPresenter {
         mModel.callRepos(new Callback<Repos>() {
             @Override
             public void onResponse(Call<Repos> call, Response<Repos> response) {
-                mView.onReposLoaded(response.body() == null ? null : response.body().getItems());
-                mView.showLoading(false);
+                if (mView != null) {
+                    mView.onReposLoaded(response.body() == null ? null : response.body().getItems());
+                    mView.showLoading(false);
+                }
             }
 
             @Override
             public void onFailure(Call<Repos> call, Throwable t) {
-                mView.onReposLoaded(null);
+                if (mView != null) {
+                    mView.onReposLoaded(null);
+                    mView.showLoading(false);
+                }
             }
         }, query);
 

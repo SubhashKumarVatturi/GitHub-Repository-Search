@@ -24,14 +24,18 @@ public class RepoDetailsPresenter implements IRepoDetails.IPresenter {
         mDetailsModel.getContributions(new Callback<List<Contributions>>() {
             @Override
             public void onResponse(Call<List<Contributions>> call, Response<List<Contributions>> response) {
-                mDetailsView.onContributionsLoaded(response.body());
-                mDetailsView.showLoading(false);
+                if (mDetailsView != null) {
+                    mDetailsView.onContributionsLoaded(response.body());
+                    mDetailsView.showLoading(false);
+                }
             }
 
             @Override
             public void onFailure(Call<List<Contributions>> call, Throwable t) {
-                mDetailsView.onContributionsLoaded(null);
-                mDetailsView.showLoading(false);
+                if (mDetailsView != null) {
+                    mDetailsView.onContributionsLoaded(null);
+                    mDetailsView.showLoading(false);
+                }
             }
         }, url);
 

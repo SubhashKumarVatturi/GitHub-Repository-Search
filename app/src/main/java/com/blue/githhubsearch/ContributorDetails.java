@@ -46,6 +46,7 @@ public class ContributorDetails extends AppCompatActivity implements IContributi
     private IContributionDetails.IPresenter mPresenter;
     private RepoAdapter mRepoAdapter;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

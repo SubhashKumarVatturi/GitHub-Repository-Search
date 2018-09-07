@@ -1,10 +1,8 @@
 package com.blue.githhubsearch.contribution;
 
 
-import com.blue.githhubsearch.model.Contributions;
 import com.blue.githhubsearch.model.ContributorData;
 import com.blue.githhubsearch.model.RepoData;
-import com.blue.githhubsearch.model.Repos;
 
 import java.util.List;
 
