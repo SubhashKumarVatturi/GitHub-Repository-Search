@@ -17,6 +17,7 @@ public interface IRepoDetails {
 
     interface IModel {
         void getContributions(Callback<List<Contributions>> callback, String url);
+        void onDestroy();
     }
 
     interface IPresenter {

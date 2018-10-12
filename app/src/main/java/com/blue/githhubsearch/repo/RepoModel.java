@@ -19,4 +19,11 @@ public class RepoModel implements IRespos.IModel {
         detailsCall.enqueue(callback);
     }
 
+    @Override
+    public void destroy() {
+        if (detailsCall != null) {
+            detailsCall.cancel();
+        }
+    }
+
 }

@@ -62,6 +62,7 @@ public class ContributionPresenter implements IContributionDetails.IPresenter {
 
     @Override
     public void onDestroy() {
+        mModel.onDestroy();
         mView = null;
         mModel = null;
     }

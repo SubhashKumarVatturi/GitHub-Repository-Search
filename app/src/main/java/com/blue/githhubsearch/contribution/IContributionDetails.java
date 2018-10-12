@@ -22,6 +22,7 @@ public interface IContributionDetails {
         void getRepos(Callback<List<RepoData>> callback, String url);
 
         void getContributorDetails(Callback<ContributorData> callback, String url);
+        void onDestroy();
     }
 
     interface IPresenter {

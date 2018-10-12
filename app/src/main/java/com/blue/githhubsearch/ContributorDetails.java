@@ -106,17 +106,19 @@ public class ContributorDetails extends AppCompatActivity implements IContributi
             tvCompany.setText(data.getCompany());
             tvLocation.setText(data.getLocation());
 
-            RequestOptions options = new RequestOptions()
-                    .centerCrop()
-                    .placeholder(R.mipmap.github_logo)
-                    .error(R.mipmap.github_logo);
+            if (!isFinishing()) {
+                RequestOptions options = new RequestOptions()
+                        .centerCrop()
+                        .placeholder(R.mipmap.github_logo)
+                        .error(R.mipmap.github_logo);
 
-            Glide.with(this).load(data.getAvatarUrl())
-                    .apply(options)
-                    .apply(RequestOptions.circleCropTransform())
-                    .into(ivAvathar);
+                Glide.with(this).load(data.getAvatarUrl())
+                        .apply(options)
+                        .apply(RequestOptions.circleCropTransform())
+                        .into(ivAvathar);
 
-            mPresenter.getRepos(data.getReposUrl());
+                mPresenter.getRepos(data.getReposUrl());
+            }
         }
     }
 
@@ -129,7 +131,14 @@ public class ContributorDetails extends AppCompatActivity implements IContributi
     @Override
     protected void onRestart() {
         super.onRestart();
-        vProgressView.setVisibility(View.GONE);
+        showLoading(false);
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if(isFinishing()){
+            mPresenter.onDestroy();
+        }
+    }
 }

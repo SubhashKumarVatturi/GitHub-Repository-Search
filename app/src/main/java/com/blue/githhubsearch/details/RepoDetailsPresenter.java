@@ -43,6 +43,7 @@ public class RepoDetailsPresenter implements IRepoDetails.IPresenter {
 
     @Override
     public void onDestroy() {
+        mDetailsModel.onDestroy();
         mDetailsView = null;
         mDetailsModel = null;
     }

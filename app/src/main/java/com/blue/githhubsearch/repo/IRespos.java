@@ -21,6 +21,8 @@ public interface IRespos {
 
     interface IModel {
         void callRepos(Callback<Repos> callback, String query);
+
+        void destroy();
     }
 
     interface IPresenter {
@@ -29,6 +31,6 @@ public interface IRespos {
         void onDestroy();
 
         void doSearchOn(EditText searchView, ImageButton closeButton);
-    }
 
+    }
 }

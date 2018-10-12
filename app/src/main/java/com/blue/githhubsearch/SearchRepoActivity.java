@@ -56,7 +56,7 @@ public class SearchRepoActivity extends AppCompatActivity implements IRespos.IVi
         rvRepoList.setLayoutManager(new LinearLayoutManager(this));
         mRepoAdapter = new RepoAdapter(new IOnclickView<RepoData>() {
             @Override
-            public void onClick(RepoData item,View view) {
+            public void onClick(RepoData item, View view) {
                 Intent repoDetailsIntent = new Intent(SearchRepoActivity.this, com.blue.githhubsearch.RepoDetails.class);
                 repoDetailsIntent.putExtra(RepoDetails.KEY_REPO_DATA, item);
                 startActivity(repoDetailsIntent);
@@ -91,9 +91,11 @@ public class SearchRepoActivity extends AppCompatActivity implements IRespos.IVi
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        mRepoPresenter.onDestroy();
+    protected void onPause() {
+        super.onPause();
+        if (isFinishing()) {
+            mRepoPresenter.onDestroy();
+        }
     }
 
 }

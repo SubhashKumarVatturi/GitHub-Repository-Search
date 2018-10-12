@@ -47,6 +47,7 @@ public class RepoPresenter implements IRespos.IPresenter {
 
     @Override
     public void onDestroy() {
+        mModel.destroy();
         mView = null;
         mModel = null;
     }

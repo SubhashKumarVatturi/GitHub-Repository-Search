@@ -131,11 +131,12 @@ public class RepoDetails extends AppCompatActivity implements IRepoDetails.IView
         vProgress.setVisibility(show ? View.VISIBLE : View.GONE);
     }
 
-
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        mPresenter.onDestroy();
+    protected void onPause() {
+        super.onPause();
+        if (isFinishing()) {
+            mPresenter.onDestroy();
+        }
     }
 
     public static final String KEY_CONTRIBUTION_DATA = "key_contribution_data";
